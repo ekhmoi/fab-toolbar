@@ -16,11 +16,9 @@ export class HomePage {
     icon: 'car',
     enableBackdropDismiss: true,
     buttons: [
-      {icon: 'mail', handler: ()=> {console.log('he clicked me :))')}},
-      {icon: 'alarm'},
-      {icon: 'laptop'},
-      {icon: 'basket'},
-      {icon: 'basketball'}
+      {icon: 'mail', handler: ()=> {console.log('close me')}},
+      {icon: 'alarm', handler: ()=> {console.log('close me')}},
+      {icon: 'laptop', handler: ()=> {console.log('dont close me'); return false}}
     ]
   }
   changeColor() {
