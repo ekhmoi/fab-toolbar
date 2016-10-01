@@ -14,6 +14,7 @@ export class HomePage {
   public options = {
     color: "danger",
     icon: 'car',
+    enableBackdropDismiss: true,
     buttons: [
       {icon: 'mail', handler: ()=> {console.log('he clicked me :))')}},
       {icon: 'alarm'},

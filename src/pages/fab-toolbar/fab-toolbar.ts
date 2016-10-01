@@ -28,6 +28,9 @@ import { Component, ElementRef, Input, Renderer, HostListener } from '@angular/c
  */
 
 @Component({ 
+    host: {
+        '(document:click)': 'onClick($event)',
+    },
     selector: 'ekhmoi-fab-toolbar',
     template: `
         <div class="ekhmoi-fab-toolbar">
@@ -55,24 +58,42 @@ export class EkhmoiFabToolbar {
         enableBackdropDismiss: true
     };
 
-    @HostListener('click') onClick(): void {
-        this.renderer.setElementClass(this.el.nativeElement, 'activated', !this.active);
-        if(this.active) {
-            setTimeout(() => {
-                this.renderer.setElementClass(this.el.nativeElement, 'opened', false)
-                this.renderer.setElementClass(this.el.nativeElement, 'closed', true);
-                this.renderer.setElementStyle(this.el.nativeElement, 'width', '68px');
-            }, 400);
+    onClick(event) {
+        // We are listening to click event on document in order to be able to close button on backdrop click
+        // Therefore we need to check if user clicked on our component or outside
+        if (this.el.nativeElement.contains(event.target)) {
+            // User has clicked on our component. Do normal procedure of animation.
+
+            this.renderer.setElementClass(this.el.nativeElement, 'activated', !this.active);
+            if(this.active) {
+                setTimeout(() => {
+                    this.renderer.setElementClass(this.el.nativeElement, 'opened', false)
+                    this.renderer.setElementClass(this.el.nativeElement, 'closed', true);
+                    this.renderer.setElementStyle(this.el.nativeElement, 'width', '68px');
+                }, 400);
+            } else {
+                setTimeout(() => {
+                    this.renderer.setElementClass(this.el.nativeElement, 'closed', false)
+                    this.renderer.setElementClass(this.el.nativeElement, 'opened', true);
+                }, 400);
+                this.renderer.setElementStyle(this.el.nativeElement, 'width', '100%');
+            }
+            this.active = !this.active;
         } else {
-            setTimeout(() => {
-                this.renderer.setElementClass(this.el.nativeElement, 'closed', false)
-                this.renderer.setElementClass(this.el.nativeElement, 'opened', true);
-            }, 400);
-            this.renderer.setElementStyle(this.el.nativeElement, 'width', '100%');
+            // User has clicked outside our component.
+            // Check if `enableBackdropDismiss` is true and if component is opened.
+
+            if(this.options.enableBackdropDismiss === true && this.active) {
+                this.renderer.setElementClass(this.el.nativeElement, 'activated', !this.active);
+                setTimeout(() => {
+                    this.renderer.setElementClass(this.el.nativeElement, 'opened', false)
+                    this.renderer.setElementClass(this.el.nativeElement, 'closed', true);
+                    this.renderer.setElementStyle(this.el.nativeElement, 'width', '68px');
+                }, 400);
+                this.active = !this.active;
+            }
         }
-        this.active = !this.active;
     }
-    
     public calculateWidth() {
         let width = window.innerWidth / 56 * 2;
         return 'scale(' + width + ')';
