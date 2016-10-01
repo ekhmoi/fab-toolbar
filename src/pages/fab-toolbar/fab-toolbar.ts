@@ -39,14 +39,13 @@ import { Component, ElementRef, Input, Renderer, HostListener } from '@angular/c
                     <button (click)="onClick($event, b)" ion-button clear color="light" icon-only><ion-icon name="{{b.icon}}"></ion-icon></button>
                 </ion-col>
             </ion-row>
-            <button [style.transform]="active ? calculateWidth() : 'scale(1)' "ion-fab color="{{options.color}}"><ion-icon name="{{options.icon}}"></ion-icon></button>
+            <button [style.transform]="active ? width: 'scale(1)' "ion-fab color="{{options.color}}"><ion-icon name="{{options.icon}}"></ion-icon></button>
         </div>
         `
 })
 
 export class EkhmoiFabToolbar {
     
-    public _options: any = {};
     public active: boolean = false;
     constructor(public el: ElementRef, public renderer: Renderer) {}
 
@@ -58,7 +57,7 @@ export class EkhmoiFabToolbar {
         enableBackdropDismiss: true
     };
 
-    onClick(event, button) {
+    public onClick(event, button: any): void {
         // We are listening to click event on document in order to be able to close button on backdrop click
         // Therefore we need to check if user clicked on our component or outside
         if (this.el.nativeElement.contains(event.target)) {
@@ -69,7 +68,6 @@ export class EkhmoiFabToolbar {
                     // a handler has been provided, execute it
                     if (button.handler() === false) {
                         // if the return value of the handler is false then do not dismiss
-                        // not working right now
                         shouldDismiss = false; 
                     }
                 }
@@ -90,11 +88,13 @@ export class EkhmoiFabToolbar {
             }
         }
     }
-    public calculateWidth() {
+
+    public get width() {
         let width = window.innerWidth / 56 * 2;
         return 'scale(' + width + ')';
     }
-    public openButton() {
+
+    public openButton(): void {
         this.renderer.setElementClass(this.el.nativeElement, 'activated', !this.active);
         setTimeout(() => {
             this.renderer.setElementClass(this.el.nativeElement, 'closed', false)
@@ -103,7 +103,8 @@ export class EkhmoiFabToolbar {
         this.renderer.setElementStyle(this.el.nativeElement, 'width', '100%');
         this.active = !this.active;
     }
-    public closeButton() {
+
+    public closeButton(): void {
         this.renderer.setElementClass(this.el.nativeElement, 'activated', !this.active);
         setTimeout(() => {
             this.renderer.setElementClass(this.el.nativeElement, 'opened', false)
@@ -111,16 +112,5 @@ export class EkhmoiFabToolbar {
             this.renderer.setElementStyle(this.el.nativeElement, 'width', '68px');
         }, 400);
         this.active = !this.active;
-    }
-    click(button: any) {
-        let shouldDismiss = true;
-        if (button.handler) {
-            // a handler has been provided, execute it
-            if (button.handler() === false) {
-                // if the return value of the handler is false then do not dismiss
-                // not working right now
-                shouldDismiss = false; 
-            }
-        }
     }
 }
