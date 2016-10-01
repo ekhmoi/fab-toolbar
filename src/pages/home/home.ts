@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ToastController } from 'ionic-angular';
 
 
 import { EkhmoiFabToolbar } from '../fab-toolbar/fab-toolbar';
@@ -8,23 +8,44 @@ import { EkhmoiFabToolbar } from '../fab-toolbar/fab-toolbar';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public toastCtrl: ToastController) {
   
   }
   public options = {
-    color: "danger",
-    icon: 'car',
+    color: "primary",
+    icon: 'images',
     enableBackdropDismiss: true,
     buttons: [
-      {icon: 'mail', handler: ()=> {console.log('close me')}},
-      {icon: 'alarm', handler: ()=> {console.log('close me')}},
-      {icon: 'laptop', handler: ()=> {console.log('dont close me'); return false}}
+      {
+        icon: 'color-wand', 
+        handler: ()=> {
+          this.presentToast('Dont close on click');
+          return false;
+        }
+      },
+      {
+        icon: 'contrast', 
+        handler: ()=> {
+          this.presentToast('Close on click');
+        }
+      },
+      {
+        icon: 'crop', 
+        handler: ()=> {
+          this.presentToast('Dont close on click');
+          return false;
+        }
+      }
     ]
   }
-  changeColor() {
-    this.options.color = 'dark';
+  presentToast(message: string) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 1000
+    });
+    toast.present();
   }
-  onAlert(event) {
+  onAlert() {
     let prompt = this.alertCtrl.create({
       title: 'Login',
       message: 'Enter your login and password',
