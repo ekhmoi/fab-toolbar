@@ -10,7 +10,7 @@ import { Component, ElementRef, Input, Renderer, HostListener } from '@angular/c
  *
  * @usage
  * ```html - simply add below tag and bind options property
- * <ekhmoi-fab-toolbar [options]="options"></ekhmoi-fab-toolbar>
+ * <fab-toolbar [options]="options"></fab-toolbar>
  * ```
  * 
  * ```javascript - starting from Ionic 2 RC0.0 (AoT) you should provide all components inside app.module.ts 
@@ -28,18 +28,15 @@ import { Component, ElementRef, Input, Renderer, HostListener } from '@angular/c
  */
 
 @Component({ 
-    host: {
-        '(document:click)': 'onClick($event)',
-    },
-    selector: 'ekhmoi-fab-toolbar',
+    selector: 'fab-toolbar',
     template: `
-        <div class="ekhmoi-fab-toolbar">
-            <ion-row [style.transform]="">
-                <ion-col width-20 *ngFor="let b of options.buttons">
+        <div class="fab-toolbar">
+            <ion-row>
+                <ion-col *ngFor="let b of buttons">
                     <button (click)="onClick($event, b)" ion-button clear color="light" icon-only><ion-icon name="{{b.icon}}"></ion-icon></button>
                 </ion-col>
             </ion-row>
-            <button [style.transform]="active ? width: 'scale(1)' "ion-fab color="{{options.color}}"><ion-icon name="{{options.icon}}"></ion-icon></button>
+            <button [style.transform]="active ? width: 'scale(1)' "ion-fab color="{{color}}"><ion-icon name="{{icon}}"></ion-icon></button>
         </div>
         `
 })
@@ -47,17 +44,26 @@ import { Component, ElementRef, Input, Renderer, HostListener } from '@angular/c
 export class EkhmoiFabToolbar {
     
     public active: boolean = false;
-    constructor(public el: ElementRef, public renderer: Renderer) {}
+    constructor(public el: ElementRef, public renderer: Renderer) {
 
-    @Input() options = {
-        color: 'secondary',
-        icon: 'more',
-        cssClass: '',
-        buttons: [],
-        enableBackdropDismiss: true
-    };
+        document.addEventListener('click', (event) => {
+            console.log('clicked');
+            this.onClick(event, false);
+        });
+    }
 
-    public onClick(event, button: any): void {
+    @Input() position: string = 'left';
+    @Input() color: string = 'secondary';
+    @Input() icon: string = 'more';
+    @Input() cssClass: string = '';
+    @Input() enableBackdropDismiss: boolean = true;
+    @Input() buttons: Array<any> = [];
+
+    ngOnInit() {
+        this.renderer.setElementClass(this.el.nativeElement, this.position, true)
+    }
+
+    onClick(event, button: any) {
         // We are listening to click event on document in order to be able to close button on backdrop click
         // Therefore we need to check if user clicked on our component or outside
         if (this.el.nativeElement.contains(event.target)) {
@@ -78,12 +84,14 @@ export class EkhmoiFabToolbar {
                     }, 10);
                 }
             } else {
-                if(!this.active)  this.openButton();
+                if(!this.active)  {
+                    this.openButton();
+                }
             }
         } else {
             // User has clicked outside our component.
             // Check if `enableBackdropDismiss` is true and if component is opened.
-            if(this.options.enableBackdropDismiss === true && this.active) {
+            if(this.enableBackdropDismiss === true && this.active) {
                 this.closeButton();
             }
         }

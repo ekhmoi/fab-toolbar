@@ -1,19 +1,49 @@
+fab-toolbar.right {
+    right: 0;
+    button[ion-fab] {
+        margin-right: 5px;
+        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        float: right;
+        ion-icon {
+            transition: all 100ms linear;
+        }
+    }
 
-ekhmoi-fab-toolbar {
-    position: fixed;
+}
+
+fab-toolbar.left {
     left: 0;
+    button[ion-fab] {
+        margin-left: 5px;
+        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        float: left;
+        ion-icon {
+            transition: all 100ms linear;
+        }
+    }
+    
+}
+
+
+
+fab-toolbar {
+    position: absolute;
+    bottom: 0px;
     width: 68px;
     height: 68px;
     transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
-    .ekhmoi-fab-toolbar {
+    z-index: 100;
+    .fab-toolbar {
         height: 100%;
         width: 100%;
         overflow: hidden;
+        position: absolute;
         ion-row {
-            position: fixed;
+            position: absolute;
             display: none;
             ion-col {
                 button {
+                    vertical-align: middle;
                     ion-icon {
                         transition: all 100ms linear;
                     }
@@ -29,11 +59,12 @@ ekhmoi-fab-toolbar {
     }
 }
 
-ekhmoi-fab-toolbar:not(.activated) {
+fab-toolbar:not(.activated) {
     width: 68px;
 }
-ekhmoi-fab-toolbar.activated {
+fab-toolbar.activated {
     width:  100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
     button[ion-fab] {
         transition-delay: 100ms;
         ion-icon {
@@ -55,7 +86,7 @@ ekhmoi-fab-toolbar.activated {
     }
 }
 
-ekhmoi-fab-toolbar.opened {
+fab-toolbar.opened {
     button[ion-fab] {
         transition-delay: 100ms;
         ion-icon {
@@ -64,10 +95,10 @@ ekhmoi-fab-toolbar.opened {
     }
     ion-row {
         width: 100%;
-        position: fixed;
+        position: absolute;
         height: 68px;
         z-index: 1;
-        line-height: 100%;
+        line-height: 68px;
         opacity: 1;
         ion-col {
             padding: 0px;
@@ -84,7 +115,7 @@ ekhmoi-fab-toolbar.opened {
         }
     }
 }
-ekhmoi-fab-toolbar:not(.activated).opened {
+fab-toolbar:not(.activated).opened {
     ion-row {
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -100,21 +131,21 @@ ekhmoi-fab-toolbar:not(.activated).opened {
         }
     }
 }
-ekhmoi-fab-toolbar:not(.activated).closed {
+fab-toolbar:not(.activated).closed {
     width: 68px;
 }
-ekhmoi-fab-toolbar.closed {
+fab-toolbar.closed {
     ion-row {
         width: 100%;
-        position: fixed;
+        position: absolute;
         height: 68px;
         z-index: 1;
-        line-height: 100%;
+        line-height: 68px;
         ion-col {
             padding: 0px;
             button {
                 line-height: 68px;
-                height: 100%;
+                height: 68px;
                 width: 100%;
                 margin: 0px;
                 padding: 0px;

@@ -1,19 +1,16 @@
 <ion-header>
   <ion-navbar  primary>
     <ion-title>Welcome</ion-title>
-    <ion-buttons end>
-      <button (click)="onAlert($event)">
-        <ion-icon name="more"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="home">
   
-  <ekhmoi-fab-toolbar [options]="options"></ekhmoi-fab-toolbar>
+  <fab-toolbar ion-fixed [color]="'primary'" [icon]="'card'" [position]="'right'" [buttons]="buttons"></fab-toolbar>
 
-
+<ion-list>
+  <ion-item *ngFor="let item of items">{{item}}</ion-item>
+</ion-list>
 
 
 </ion-content>
