@@ -10,23 +10,24 @@ The floating action button can transform into a toolbar upon press or from a too
 
 ## Usage
 ```
-<ekhmoi-fab-toolbar [options]="options"></ekhmoi-fab-toolbar>
+<fab-toolbar [color]="'secondary'" [icon]="'more'" [enableBackdropDismiss]="'false'" [buttons]="buttons"></fab-toolbar>
 ```
 
 ```
-import { EkhmoiFabToolbar } from '../fab-toolbar/fab-toolbar';
 
-options = {
-    color: "danger",
-    icon: 'car',
-    enableBackdropDismiss: true,
-    buttons: [
+buttons =  [
       {icon: 'mail', handler: ()=> {console.log('close me')}},
       {icon: 'alarm', handler: ()=> {console.log('close me')}},
       {icon: 'laptop', handler: ()=> {console.log('dont close me'); return false}}
     ]
-}
 ```
+
+## Options
+
+* color: string - color variable of the fab button
+* icon: string - icon of the fab button
+* enableBackdropDismiss: boolean - if false fab toolbar will stay open on click backdrop
+* buttons: Array<{icon?: string, handler?: function}> if handler will return false toolbar will not close 
 
 ## Install
 Get files inside dist folder and copy to your project
