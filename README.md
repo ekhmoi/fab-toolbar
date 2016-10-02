@@ -25,6 +25,7 @@ buttons =  [
 ## Options
 
 * color: string - color variable of the fab button
+* position: string - `left` or `right`
 * icon: string - icon of the fab button
 * enableBackdropDismiss: boolean - if false fab toolbar will stay open on click backdrop
 * buttons: Array<{icon?: string, handler?: function}> if handler will return false toolbar will not close 
