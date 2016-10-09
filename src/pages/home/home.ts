@@ -16,7 +16,8 @@ export class HomePage {
   }
   public buttons =  [
       {
-        icon: 'color-wand', 
+        icon: 'color-wand',
+        title: 'Color',
         handler: ()=> {
           this.presentToast('Dont close on click');
           return false;
@@ -24,12 +25,14 @@ export class HomePage {
       },
       {
         icon: 'contrast', 
+        title: 'Contrast',
         handler: ()=> {
           this.presentToast('Close on click');
         }
       },
       {
-        icon: 'crop', 
+        icon: 'crop',
+        title: 'Crop',
         handler: ()=> {
           this.presentToast('Dont close on click');
           return false;

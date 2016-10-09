@@ -2,11 +2,7 @@ fab-toolbar.right {
     right: 0;
     button[ion-fab] {
         margin-right: 5px;
-        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
         float: right;
-        ion-icon {
-            transition: all 100ms linear;
-        }
     }
 
 }
@@ -15,24 +11,23 @@ fab-toolbar.left {
     left: 0;
     button[ion-fab] {
         margin-left: 5px;
-        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
         float: left;
-        ion-icon {
-            transition: all 100ms linear;
-        }
     }
     
 }
 
 
-
 fab-toolbar {
     position: absolute;
-    bottom: 0px;
     width: 68px;
     height: 68px;
     transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 100;
+    .backdrop {
+        display: none;
+        transition: all 100ms linear;
+        position: absolute;
+    }
     .fab-toolbar {
         height: 100%;
         width: 100%;
@@ -43,10 +38,19 @@ fab-toolbar {
             display: none;
             ion-col {
                 button {
-                    vertical-align: middle;
-                    ion-icon {
+                    div {
                         transition: all 100ms linear;
                     }
+                }
+            }
+            ion-col.icon-and-title {
+                ion-icon {
+                    font-size: 25px;
+                }
+                label {    
+                    font-size: 10px;
+                    text-decoration: none;
+                    text-transform: none;
                 }
             }
         }
@@ -65,6 +69,13 @@ fab-toolbar:not(.activated) {
 fab-toolbar.activated {
     width:  100%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+
+    .backdrop {
+        display: block;
+        opacity: 0;
+        width: 100vw;
+        height: 100vh;
+    }
     button[ion-fab] {
         transition-delay: 100ms;
         ion-icon {
@@ -78,7 +89,7 @@ fab-toolbar.activated {
         opacity: 0;
         ion-col {
             button {
-                ion-icon {
+                div {
                     transform: scale(0)
                 }
             }
@@ -87,6 +98,9 @@ fab-toolbar.activated {
 }
 
 fab-toolbar.opened {
+    .backdrop {
+        opacity: 1;
+    }
     button[ion-fab] {
         transition-delay: 100ms;
         ion-icon {
@@ -98,17 +112,16 @@ fab-toolbar.opened {
         position: absolute;
         height: 68px;
         z-index: 1;
-        line-height: 68px;
+        line-height: 100%;
         opacity: 1;
         ion-col {
             padding: 0px;
             button {
-                line-height: 68px;
-                height: 100%;
+                height: 68px;
                 width: 100%;
                 margin: 0px;
                 padding: 0px;
-                ion-icon {
+                div {
                     transform: scale(1);
                 }
             }
@@ -124,7 +137,7 @@ fab-toolbar:not(.activated).opened {
         transition-delay: 100ms;
         ion-col {
             button {
-                ion-icon {
+                div {
                     transform: scale(0);
                 }
             }
@@ -140,12 +153,11 @@ fab-toolbar.closed {
         position: absolute;
         height: 68px;
         z-index: 1;
-        line-height: 68px;
+        line-height: 100%;
         ion-col {
             padding: 0px;
             button {
-                line-height: 68px;
-                height: 68px;
+                height: 100%;
                 width: 100%;
                 margin: 0px;
                 padding: 0px;

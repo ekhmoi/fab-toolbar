@@ -5,7 +5,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { EkhmoiFabToolbar } from '../pages/fab-toolbar/fab-toolbar';
+import { FabToolbar } from '../pages/fab-toolbar/fab-toolbar';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { EkhmoiFabToolbar } from '../pages/fab-toolbar/fab-toolbar';
     ContactPage,
     HomePage,
     TabsPage,
-    EkhmoiFabToolbar
+    FabToolbar
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +26,7 @@ import { EkhmoiFabToolbar } from '../pages/fab-toolbar/fab-toolbar';
     ContactPage,
     HomePage,
     TabsPage,
-    EkhmoiFabToolbar
+    FabToolbar
   ],
   providers: []
 })
