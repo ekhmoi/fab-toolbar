@@ -7,17 +7,18 @@ import { NavController, AlertController, ToastController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  public items: Array<number> = []
-
+  public color: string = 'primary';
+  public position: string = 'right';
+  public icon: string = 'car';
+  public enableBackdropDismiss: boolean = false;
+  public buttonColor: string = 'dark';
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public toastCtrl: ToastController) {
-    for(let i = 0; i < 200; i++) {
-      this.items.push(i);
-    }
   }
   public buttons =  [
       {
         icon: 'color-wand',
         title: 'Color',
+        color: this.buttonColor,
         handler: ()=> {
           this.presentToast('Dont close on click');
           return false;
@@ -26,6 +27,7 @@ export class HomePage {
       {
         icon: 'contrast', 
         title: 'Contrast',
+        color: this.buttonColor,
         handler: ()=> {
           this.presentToast('Close on click');
         }
@@ -33,6 +35,7 @@ export class HomePage {
       {
         icon: 'crop',
         title: 'Crop',
+        color: this.buttonColor,
         handler: ()=> {
           this.presentToast('Dont close on click');
           return false;

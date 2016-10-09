@@ -122,22 +122,22 @@ export class FabToolbar {
     }
 
     public openButton(): void {
-        this.renderer.setElementClass(this.el.nativeElement, 'activated', !this.active);
+        this.renderer.setElementClass(this.el.nativeElement, 'activated', true);
         setTimeout(() => {
             this.renderer.setElementClass(this.el.nativeElement, 'closed', false)
             this.renderer.setElementClass(this.el.nativeElement, 'opened', true);
         }, 400);
         this.renderer.setElementStyle(this.el.nativeElement, 'width', '100%');
-        this.active = !this.active;
+        this.active = true;
     }
 
     public closeButton(): void {
-        this.renderer.setElementClass(this.el.nativeElement, 'activated', !this.active);
+        this.renderer.setElementClass(this.el.nativeElement, 'activated', false);
         setTimeout(() => {
             this.renderer.setElementClass(this.el.nativeElement, 'opened', false)
             this.renderer.setElementClass(this.el.nativeElement, 'closed', true);
             this.renderer.setElementStyle(this.el.nativeElement, 'width', '68px');
         }, 400);
-        this.active = !this.active;
+        this.active = false;
     }
 }

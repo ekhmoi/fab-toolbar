@@ -6,10 +6,40 @@
 
 <ion-content padding class="home">
   
-  <fab-toolbar ion-fixed [color]="'primary'" [icon]="'card'" [position]="'left'" [buttons]="buttons"></fab-toolbar>
+  <fab-toolbar ion-fixed [enableBackdropDismiss]="enableBackdropDismiss" [color]="color" [icon]="icon" [position]="position"  [buttons]="buttons"></fab-toolbar>
 
 <ion-list>
-  <ion-item *ngFor="let item of items">{{item}}</ion-item>
+  <ion-item>
+    <ion-label>Color</ion-label>
+    <ion-select [(ngModel)]="color">
+      <ion-option value="primary">Primary</ion-option>
+      <ion-option value="secondary">Secondary</ion-option>
+      <ion-option value="dark">Dark</ion-option>
+      <ion-option value="light">Light</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Button Color</ion-label>
+    <ion-select [(ngModel)]="buttonColor">
+      <ion-option value="primary">Primary</ion-option>
+      <ion-option value="secondary">Secondary</ion-option>
+      <ion-option value="dark">Dark</ion-option>
+      <ion-option value="light">Light</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Icon</ion-label>
+    <ion-select [(ngModel)]="icon">
+      <ion-option value="car">Car</ion-option>
+      <ion-option value="card">Card</ion-option>
+      <ion-option value="cart">Cart</ion-option>
+      <ion-option value="add">Add</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Backdrop Click</ion-label>
+    <ion-toggle [(ngModel)]="enableBackdropDismiss" checked="false"></ion-toggle>
+  </ion-item>
 </ion-list>
 
 
