@@ -10,15 +10,15 @@ The floating action button can transform into a toolbar upon press or from a too
 
 ## Usage
 ```
-<fab-toolbar [color]="'secondary'" [icon]="'more'" [enableBackdropDismiss]="'false'" [buttons]="buttons"></fab-toolbar>
+<fab-toolbar [position]="'left" [color]="'light'" [icon]="'more'" [enableBackdropDismiss]="'false'" [buttons]="buttons"></fab-toolbar>
 ```
 
 ```
 
 buttons =  [
-      {icon: 'mail', handler: ()=> {console.log('close me')}},
-      {icon: 'alarm', handler: ()=> {console.log('close me')}},
-      {icon: 'laptop', handler: ()=> {console.log('dont close me'); return false}}
+      {icon: 'mail', title: 'Mail', color: 'dark', handler: ()=> {console.log('close me')}},
+      {icon: 'alarm', title: 'Alarm', color: 'dark', handler: ()=> {console.log('close me')}},
+      {icon: 'laptop', title: 'Laptop', color: 'dark', handler: ()=> {console.log('dont close me'); return false}}
     ]
 ```
 
@@ -28,7 +28,7 @@ buttons =  [
 * position: string - `left` or `right`
 * icon: string - icon of the fab button
 * enableBackdropDismiss: boolean - if false fab toolbar will stay open on click backdrop
-* buttons: Array<{icon?: string, handler?: function}> if handler will return false toolbar will not close 
+* buttons: Array<{icon?: string, title?: string, color?: string, handler?: function}> if handler will return false toolbar will not close 
 
 ## Install
 Get files inside dist folder and copy to your project
@@ -36,18 +36,18 @@ Get files inside dist folder and copy to your project
 * starting from Ionic 2 RC0.0 (AoT) you should provide all components inside app.module.ts 
 
 ```
-import { EkhmoiFabToolbar } from '../pages/fab-toolbar/fab-toolbar';
+import { FabToolbar } from '../pages/fab-toolbar/fab-toolbar';
 
 @NgModule({
   declarations: [
-    EkhmoiFabToolbar
+    FabToolbar
   ],
   imports: [
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    EkhmoiFabToolbar
+    FabToolbar
   ]
 })
 ```
