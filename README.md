@@ -3,7 +3,7 @@
 Version 0.0.2
 
 
-# ekhmoi-fab-toolbar
+# fab-toolbar
 A Material Design Fab Toolbar is Ionic v2 component which uses Ionic's fab buttons, buttons.
 
 The floating action button can transform into a toolbar upon press or from a toolbar upon scroll. The toolbar can contain related actions, text and search fields, or any other items that would be useful at hand.
